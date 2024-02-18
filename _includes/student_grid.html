@@ -1,15 +1,15 @@
 <!-- Student Grid Section -->
 <section id="students">
-  <div class="container student-flex-grid">
+  <div class="container portfolio-flex-grid">
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2>Students</h2>
         <hr class="star-primary">
       </div>
     </div>
-    <div class="student-flex-row">
+    <div class="portfolio-flex-row">
       {% for student in site.posts %}
-      <div class="student-flex-item student-item">
+      <div class="portfolio-flex-item portfolio-item">
         <a href="#studentModal-{{ student.modal-id }}" class="portfolio-link" data-toggle="modal">
           <div class="caption">
             <div class="caption-content">
@@ -18,7 +18,7 @@
           </div>
           <!-- Placeholder box instead of image -->
           <div class="placeholder-box" style="background-color: #000;">>
-            <p>{student.fullName}</p>
+            <p>{{student.fullName}}</p>
           </div>
         </a>
       </div>
