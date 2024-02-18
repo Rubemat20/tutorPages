@@ -8,9 +8,9 @@
       </div>
     </div>
     <div class="portfolio-flex-row">
-      {% for student in site.students %}
+      {% for student in site.posts %}
       <div class="portfolio-flex-item portfolio-item">
-        <a href="#studentModal-{{ student.modal-id }}" class="portfolio-link" data-toggle="modal">
+        <a href="#portfolioModal-{{ student.modal-id }}" class="portfolio-link" data-toggle="modal">
           <div class="caption">
             <div class="caption-content">
               <i class="fa fa-search-plus fa-3x"></i>
@@ -18,7 +18,7 @@
           </div>
           <!-- Placeholder box instead of image -->
           <div class="placeholder-box" style="background-color: #000;">>
-            <p>{{student.fullName}}</p>
+            <p>No image available</p>
           </div>
         </a>
       </div>
