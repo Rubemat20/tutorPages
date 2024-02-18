@@ -7,6 +7,7 @@ Plug-and-Play Tutoring - Instant set up of a community service tutoring program 
 - A mechanism for undergrads/grads to apply to be tutors
 - A mechanism to match tutors and students, once enrolled and admitted
 - A calendar to track when tutoring sessions will occur
+
 A good technical infrastructure would also include certain ‘luxuries’, including:
 - Automated reminder emails to tutors and tutees based on the calendar
 - A mechanism to collect basic analytics: most in-demand subjects, times, etc.
@@ -30,6 +31,8 @@ Though we haven't moved forward with implementing our website with it, we've lea
 ## What's next for TutorPages
 Though in the 36hr format of Treehacks we of course can't perfectly implement every niche detail of a product like TutorPages, in the future we'll be continuing to work on it. As we've planned it out there's an ever-growing depth - for example, one key element we'd like to add is log-in and private access for different members of the organization, tutors, parents, students, admin, etc.
 
+## The Matching Algorithm
+Taking lists of lists of tutor and tutee information read in by text from our student enrollment/tutor application forms, we make Tutor and Tutee python objects. For a total offering of n subjects and k times, we provide helper functions to 1) take the distance formula on two n-dimensional vectors/points and 2) find overlaps out of lists of <= k times of availability. Using these helpers, we match every tutee to one tutor, with only tutors having the possibility of remaining unmatched. We do this as follows: after making sure the potential-match tutor and tutee are available at the same time, we optimize for similarity of subject preference vectors: tutors that are most comfortable tutoring a given subject are paired with students most in need of help with that subject. Finally, we produce Session objects from our matching dictionary, and store them. We should be left with a grouping of Session objects which can be queried for information about the tutor and tutee, the time, subjects being tutored, and so on.
 
 Getting Started with TutorPages
 =========================
