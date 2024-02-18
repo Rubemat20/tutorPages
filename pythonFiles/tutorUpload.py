@@ -1,72 +1,99 @@
 import os
 from datetime import date
 from git import Repo
+import openpyxl
 
-def read_tutor_info(folder_path):
+def read_tutor_info_from_excel(file_path):
     tutor_info_list = []
-    for file_name in os.listdir(folder_path):
-        if file_name.endswith('.txt'):
-            with open(os.path.join(folder_path, file_name), 'r') as file:
-                tutor_info = file.read()
-                tutor_info_list.append(tutor_info.strip())
+    wb = openpyxl.load_workbook(file_path)
+    sheet = wb.active
+    for row in sheet.iter_rows(values_only=True):
+        tutor_info = '\n'.join(str(cell) for cell in row)
+        tutor_info_list.append(tutor_info.strip())
     return tutor_info_list
-
-def increment_modal_id(tutor_info_list):
-    new_tutor_info_list = []
-    for i, tutor_info in enumerate(tutor_info_list, start=1):
-        new_tutor_info = tutor_info.replace('modal-id: 6', f'modal-id: {i}')
-        new_tutor_info_list.append(new_tutor_info)
-    return new_tutor_info_list
-
-def generate_image_filename(tutor_name):
-    first_name = tutor_name.split()[0].lower()  # Assuming tutor name is in the format "First Last"
-    return f'{first_name}.png'
-
 def create_markdown_files(tutor_info_list):
     today = date.today().strftime('%Y/%m/%d')
     file_names = []
-    for i, tutor_info in enumerate(tutor_info_list, start=1):
+    info_type = tutor_info_list[0]
+    for i, tutor_info in enumerate(tutor_info_list[1:], start=1):
         lines = tutor_info.split('\n')
-        tutor_name = lines[6].split(': ')[1]
-        lines[1] = f"modal-id: {i}"
-        lines[2] = f"date: {today}"
-        lines[3] = f"img: {generate_image_filename(tutor_name)}"
-        lines[8] = f"subject(s): {lines[8].split(': ')[1]}"  # Assuming subject(s) field is already in the correct format
-        file_names.append(f'tutor_{i}.md')
-        with open(f'tutor_{i}.md', 'w') as file:
-            file.write('\n'.join(lines))
+        tutor_name = lines[6].split(' ')[1]
+        scores = []
+        total = 0
+        for line in lines[17:23]:
+            scores.append(line)
+            total += int(line)
+        for x, score in enumerate(scores):
+            scores[x] = int(score)*10/total
+        file_content = f"""\
+            ### Tutor Information
+
+            - ID: {lines[0]}
+            - Start time: {lines[1]}
+            - Completion time: {lines[2]}
+            - Email: {lines[3]}
+            - Name: {lines[4]}
+            - Last modified time: {lines[5]}
+            - Full name: {lines[6]}
+            - Date of birth: {lines[7]}
+            - School: {lines[8]}
+            - Grade: {lines[9]}
+            - Email2: {lines[10]}
+            - Phone number: {lines[11]}
+            - Payment method: {lines[12]}
+            - Signature: {lines[13]}
+            - Do you agree with attendance policy?: {lines[14]}
+            - Do you agree with refund policy?: {lines[15]}
+            - Any comments: {lines[16]}
+            - Math Comfort Level: {lines[17]}
+            - Biology Comfort Level: {lines[18]}
+            - Physics Comfort Level: {lines[19]}
+            - Chemistry Comfort Level: {lines[20]}
+            - English Comfort Level: {lines[21]}
+            - Social Studies Comfort Level: {lines[22]}
+            - Vectorized Scores: {scores}
+            """
+        
+        file_name = f'tutor_{tutor_name}.md'
+        file_names.append(file_name)
+        with open(file_name, 'w') as file:
+            file.write('\n'.join(file_content))
     return file_names
+
 def push_to_github(repo_path, file_names, commit_message):
     repo = Repo(repo_path)
+    folder_path = "tutors"
     for file_path in file_names:
-        repo.index.add([file_path])
+        new_file_path = os.path.join(folder_path, os.path.basename(file_path))
+        os.rename(file_path, new_file_path)
+        repo.index.add([new_file_path])
     repo.index.commit(commit_message)
     origin = repo.remote(name='origin')
     origin.push()
 
-def main():
-    # Define folder containing .txt files
-    folder_path = 'folder_of_txt_files'
-
-    # Read student names from .txt files
-    tutor_list = read_tutor_info(folder_path)
-
-    # Create Markdown file listing student names
-    file_names = create_markdown_files(tutor_list)
+def find_git_repo_directory():
     current_dir = os.getcwd()
-    repo_path = None
     while True:
-        # Check if the .git directory exists in the current directory
         if os.path.isdir(os.path.join(current_dir, '.git')):
-            repo_path = current_dir
-            break
-        # Move up one directory
+            return current_dir
         current_dir = os.path.dirname(current_dir)
-        # Stop if we've reached the root directory
         if current_dir == '/':
+            raise FileNotFoundError("Git repository not found.")
             break
+def main():
+    # Define path to the Excel file containing tutor information
+    excel_file_path = 'tutorinfo.xlsx'
 
-    # Push Markdown file to GitHub
+    # Read tutor information from Excel file
+    tutor_list = read_tutor_info_from_excel(excel_file_path)
+
+    # Create Markdown file listing tutor information
+    file_names = create_markdown_files(tutor_list)
+
+    # Find the root directory of the Git repository
+    repo_path = find_git_repo_directory()
+
+    # Push Markdown files to GitHub
     push_to_github(repo_path, file_names, 'Add list of tutors')
 
 if __name__ == "__main__":
