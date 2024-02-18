@@ -2,7 +2,7 @@
 layout: default
 modal-id: 1
 date: 2024-02-17
-img: code2.jpg
+img: code.png
 alt: image-alt
 project-date: Feb 2024
 client: Start the Algorithm
