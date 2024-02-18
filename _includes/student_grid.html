@@ -3,7 +3,7 @@
   <div class="container portfolio-flex-grid">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2>Tutors</h2>
+        <h2>Students</h2>
         <hr class="star-primary">
       </div>
     </div>
@@ -17,7 +17,7 @@
             </div>
           </div>
           <!-- Placeholder box instead of image -->
-          <div class="placeholder-box">
+          <div class="placeholder-box" style="background-color: #000;">>
             <p>No image available</p>
           </div>
         </a>
@@ -26,3 +26,15 @@
     </div>
   </div>
 </section>
+<script>
+  // Function to generate a random color in hexadecimal format
+  function generateRandomColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
+  }
+
+  // Get all placeholder boxes and set their background color to a random color
+  const placeholderBoxes = document.querySelectorAll('.placeholder-box');
+  placeholderBoxes.forEach(function(box) {
+    box.style.backgroundColor = generateRandomColor();
+  });
+</script>
