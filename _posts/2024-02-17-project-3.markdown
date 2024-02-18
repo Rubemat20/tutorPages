@@ -1,0 +1,11 @@
+---
+layout: default
+modal-id: 3
+date: 2024-02-17
+img: code3.jpg
+alt: image-alt
+project-date: Feb 2024
+client: Quickstart
+category: Development
+description: The pythonfiles folder contains a matching algorithm that pairs tutors and tutees together, along with methods for uploading and converting tutor and student signups, and a pipeline to run it all quickly!
+---
