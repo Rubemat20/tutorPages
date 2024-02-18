@@ -23,6 +23,8 @@ def create_markdown_files(tutor_info_list):
         for line in lines[17:23]:
             scores.append(line)
             total += int(line)
+        if (len(lines)) < 24:
+            lines.append("Monday")
         for x, score in enumerate(scores):
             scores[x] = int(score)*10/total
         file_content = f"""\
@@ -52,12 +54,13 @@ def create_markdown_files(tutor_info_list):
             - English Comfort Level: {lines[21]}
             - Social Studies Comfort Level: {lines[22]}
             - Vectorized Scores: {scores}
+            - Dates: {lines[23]}
             """
         
         file_name = f'tutor_{tutor_name}.md'
         file_names.append(file_name)
         with open(file_name, 'w') as file:
-            file.write('\n'.join(file_content))
+            file.write(file_content)
     return file_names
 
 def push_to_github(repo_path, file_names, commit_message):
@@ -65,6 +68,13 @@ def push_to_github(repo_path, file_names, commit_message):
     folder_path = "tutors"
     for file_path in file_names:
         new_file_path = os.path.join(folder_path, os.path.basename(file_path))
+        try:
+            os.rename(file_path, new_file_path)
+        except FileExistsError:
+            # Delete the existing file before renaming the new file
+            os.remove(new_file_path)
+            os.rename(file_path, new_file_path)
+        # Add the moved file to the repository
         repo.index.add([new_file_path])
     repo.index.commit(commit_message)
     origin = repo.remote(name='origin')
