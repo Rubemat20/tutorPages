@@ -1,28 +1,24 @@
-            ### Tutor Information
-
-            - ID: 1
-            - Start time: 2024-02-17 16:52:21
-            - Completion time: 2024-02-17 16:53:11
-            - Email: anonymous
-            - Name: None
-            - Last modified time: None
-            - Full name: Jack Smith
-            - Date of birth: 2000-05-02 00:00:00
-            - School: UCLA
-            - Grade: Sophomore
-            - Email2: jacksmith@gmail.com
-            - Phone number: 1234567890
-            - Payment method: Debit/Credit card
-            - Signature: Jack Smith
-            - Do you agree with attendance policy?: Yes
-            - Do you agree with refund policy?: Yes
-            - Any comments: None
-            - Math Comfort Level: 8
-            - Biology Comfort Level: 6
-            - Physics Comfort Level: 8
-            - Chemistry Comfort Level: 6
-            - English Comfort Level: 4
-            - Social Studies Comfort Level: 3
-            - Vectorized Scores: [2.2857142857142856, 1.7142857142857142, 2.2857142857142856, 1.7142857142857142, 1.1428571428571428, 0.8571428571428571]
-            - Dates: Monday
+            ---
+            layout: default
+            modal-id: 3
+            email: anonymous
+            date: None
+            fullName: Jack Smith
+            dob: 2000-05-02 00:00:00
+            school: UCLA
+            grade: Senior
+            phonenumber: 1234567890
+            Signature: Jack Smith
+            ComfortwithMath: 3
+            ComfortwithBiology: 5
+            ComfortwithPhysics: 9
+            ComfortwithChemistry: 3
+            ComfortwithEnglish: 6
+            ComfortwithSocialStudies: 7
+            Vectorized Scores: [0.9090909090909091, 1.5151515151515151, 2.727272727272727, 0.9090909090909091, 1.8181818181818181, 2.121212121212121]
+            project-date: Monday;Wednesday;Friday;Sunday;
+            client: Jack Smith
+            img: cap1.jpg
+            description: Jack Smith at UCLA with expertise in physics
+            ---
             
