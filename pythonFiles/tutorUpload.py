@@ -20,43 +20,45 @@ def create_markdown_files(tutor_info_list):
         tutor_name = lines[6].split(' ')[1]
         scores = []
         total = 0
-        for line in lines[17:23]:
+        subjects = ["math", "biology", "physics", "chemistry", "english", "social studies"]
+        topScore = 0
+        topSubject = subjects[0]
+        count = 15
+        for line in lines[15:21]:
+            if int(line) > int(topScore):
+                topScore = line
+                topSubject = subjects[count-15]
+            count +=1
             scores.append(line)
             total += int(line)
-        if (len(lines)) < 24:
-            lines.append("Monday")
         for x, score in enumerate(scores):
             scores[x] = int(score)*10/total
+    
         file_content = f"""\
-            ### Tutor Information
-
-            - ID: {lines[0]}
-            - Start time: {lines[1]}
-            - Completion time: {lines[2]}
-            - Email: {lines[3]}
-            - Name: {lines[4]}
-            - Last modified time: {lines[5]}
-            - Full name: {lines[6]}
-            - Date of birth: {lines[7]}
-            - School: {lines[8]}
-            - Grade: {lines[9]}
-            - Email2: {lines[10]}
-            - Phone number: {lines[11]}
-            - Payment method: {lines[12]}
-            - Signature: {lines[13]}
-            - Do you agree with attendance policy?: {lines[14]}
-            - Do you agree with refund policy?: {lines[15]}
-            - Any comments: {lines[16]}
-            - Math Comfort Level: {lines[17]}
-            - Biology Comfort Level: {lines[18]}
-            - Physics Comfort Level: {lines[19]}
-            - Chemistry Comfort Level: {lines[20]}
-            - English Comfort Level: {lines[21]}
-            - Social Studies Comfort Level: {lines[22]}
-            - Vectorized Scores: {scores}
-            - Dates: {lines[23]}
+            ---
+            layout: default
+            modal-id: {lines[0]}
+            email: {lines[3]}
+            date: {lines[5]}
+            fullName: {lines[6]}
+            dob: {lines[7]}
+            school: {lines[8]}
+            grade: {lines[9]}
+            phonenumber: {lines[11]}
+            Signature: {lines[12]}
+            ComfortwithMath: {lines[15]}
+            ComfortwithBiology: {lines[16]}
+            ComfortwithPhysics: {lines[17]}
+            ComfortwithChemistry: {lines[18]}
+            ComfortwithEnglish: {lines[19]}
+            ComfortwithSocialStudies: {lines[20]}
+            Vectorized Scores: {scores}
+            project-date: {lines[21]}
+            client: {lines[6]}
+            img: cap{int(lines[0])%3+1}.jpg
+            description: {lines[6]} at {lines[8]} with expertise in {topSubject}
+            ---
             """
-        
         file_name = f'tutor_{tutor_name}.md'
         file_names.append(file_name)
         with open(file_name, 'w') as file:
