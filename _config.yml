@@ -62,9 +62,9 @@ collections_dir: ""
 collections:
   tutors:
     output: true
-    permalink: "/tutors/:title/"
+    permalink: "/tutors/:modal-id/"
     directory: "tutors"
   students:
     output: true
-    permalink: "/students/:title/"
+    permalink: "/students/:modal-id/"
     directory: "students"
