@@ -57,19 +57,14 @@ defaults:
     values:
       permalink: ""
 
-
-#for tutors
-defaults:
-  - scope:
-      path: ""
-      type: "tutors"
-    values:
-      permalink: ""
-
-#for students
-defaults:
-  - scope:
-      path: ""
-      type: "students"
-    values:
-      permalink: ""
+# Collections
+collections_dir: ""
+collections:
+  tutors:
+    output: true
+    permalink: "/tutors/:title/"
+    directory: "tutors"
+  students:
+    output: true
+    permalink: "/students/:title/"
+    directory: "students"
