@@ -65,7 +65,6 @@ def push_to_github(repo_path, file_names, commit_message):
     folder_path = "tutors"
     for file_path in file_names:
         new_file_path = os.path.join(folder_path, os.path.basename(file_path))
-        os.rename(file_path, new_file_path)
         repo.index.add([new_file_path])
     repo.index.commit(commit_message)
     origin = repo.remote(name='origin')
