@@ -1,0 +1,11 @@
+---
+layout: default
+modal-id: 2
+date: 2024-02-17
+img: code2.jpg
+alt: image-alt
+project-date: February 2024
+client: Tutor Franchises
+category: Purpose
+description: The goal of this Github repo is to provide tutoring student organizations a model and a code package to create better, more efficient matches between tutor and tutee.
+---
