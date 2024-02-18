@@ -1,0 +1,11 @@
+---
+layout: default
+modal-id: 4
+date: 2024-02-17
+img: code4.jpg
+alt: image-alt
+project-date: Feb 2024
+client: Converting File Types
+category: The Pipeline
+description: The pipeline utilizes all the files in the pythonFiles folder to take two spreadsheets of tutors and tutees and create a separate markdown file, available to be published to your site later, before pairing them together.
+---
