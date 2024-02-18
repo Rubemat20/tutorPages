@@ -1,0 +1,11 @@
+---
+layout: default
+modal-id: 1
+date: 2024-02-17
+img: code2.jpg
+alt: image-alt
+project-date: Feb 2024
+client: Start the Algorithm
+category: Creating Tutors
+description: Each tutor is initialized with vector weighting to their various subjects and time availabilities, creating a matchable object for students.
+---

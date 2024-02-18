@@ -56,3 +56,15 @@ defaults:
       type: "posts"
     values:
       permalink: ""
+
+# Collections
+collections_dir: ""
+collections:
+  tutors:
+    output: true
+    permalink: "/tutors/:modal-id/"
+    directory: "tutors"
+  students:
+    output: true
+    permalink: "/students/:modal-id/"
+    directory: "students"
