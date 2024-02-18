@@ -56,3 +56,20 @@ defaults:
       type: "posts"
     values:
       permalink: ""
+
+
+#for tutors
+defaults:
+  - scope:
+      path: ""
+      type: "tutors"
+    values:
+      permalink: ""
+
+#for students
+defaults:
+  - scope:
+      path: ""
+      type: "students"
+    values:
+      permalink: ""
